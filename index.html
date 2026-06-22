@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Tipografías románticas de Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========================================================
+       PANTALLA INICIAL — se muestra antes de que empiece la música
+       ======================================================== -->
+  <div id="intro-screen">
+    <div class="intro-content">
+      <div class="intro-emoji">🌹</div>
+      <h1 class="intro-title">Para Ti</h1>
+      <p class="intro-subtitle">
+        Hay palabras que no alcanzan a decir lo que siento.<br />
+        Pero esta canción sí puede.
+      </p>
+      <p class="intro-dedication">
+        Con todo mi amor,<br />
+        <span class="intro-name">Yahir ✨</span>
+      </p>
+      <!-- Botón que inicia la música y la animación -->
+      <button id="start-btn" onclick="startExperience()">
+        ❤️ &nbsp;Comenzar
+      </button>
+    </div>
+    <!-- Corazones decorativos en la pantalla inicial -->
+    <div class="intro-hearts" id="intro-hearts"></div>
+  </div>
+
+  <!-- ========================================================
+       PANTALLA PRINCIPAL — karaoke / letras sincronizadas
+       ======================================================== -->
+  <main id="main-screen" class="hidden">
+
+    <!-- Canvas de partículas de corazones flotantes (fondo) -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- Título discreto en la parte superior -->
+    <header class="song-header">
+      <span class="song-emoji">🎵</span>
+      <span class="song-title-text">Yo Que No Vivo Sin Ti — Luis Miguel</span>
+      <span class="song-emoji">🎵</span>
+    </header>
+
+    <!-- Área central donde aparecen las líneas de la letra -->
+    <section class="lyrics-stage">
+      <!-- Línea anterior (atenuada) -->
+      <p id="lyric-prev" class="lyric-line lyric-prev"></p>
+      <!-- Línea activa (resaltada) -->
+      <p id="lyric-current" class="lyric-line lyric-current"></p>
+      <!-- Línea siguiente (apenas visible, anticipo) -->
+      <p id="lyric-next" class="lyric-line lyric-next"></p>
+    </section>
+
+    <!-- Panel inferior: tiempo y barra de progreso -->
+    <footer class="player-footer">
+      <div class="progress-wrap">
+        <span id="time-elapsed" class="time-display">0:00</span>
+        <div class="progress-bar-bg">
+          <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+        <span id="time-total" class="time-display">0:00</span>
+      </div>
+      <!-- Emojis decorativos fijos -->
+      <div class="footer-emojis">💖 &nbsp;🌹 &nbsp;✨ &nbsp;💖</div>
+    </footer>
+
+    <!-- Elemento de audio oculto.
+         Cambia "cancion.mp3" por el nombre real de tu archivo. -->
+    <audio id="audio-player" preload="auto">
+      <source src="cancion.mp4" type="audio/mpeg" />
+      Tu navegador no soporta audio HTML5.
+    </audio>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>     

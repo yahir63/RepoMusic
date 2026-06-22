@@ -1,0 +1,391 @@
+/* ============================================================
+   styles.css — Regalo Digital Romántico
+   Paleta: negro profundo + rosas/fucsia + dorado suave
+   Tipografía: Playfair Display (display) + Lato (cuerpo)
+   ============================================================ */
+
+/* ── Variables de diseño ─────────────────────────────────── */
+:root {
+  --bg-deep:        #0a0510;   /* fondo principal, casi negro violáceo */
+  --bg-card:        #130c1e;   /* capas internas */
+  --rose-soft:      #f472b6;   /* rosa suave — línea anterior */
+  --rose-vivid:     #ec4899;   /* rosa vivo — línea activa */
+  --fuchsia:        #d946ef;   /* fucsia — acento */
+  --gold:           #fcd34d;   /* dorado suave — detalles */
+  --white-dim:      rgba(255,255,255,0.55);
+  --white-ghost:    rgba(255,255,255,0.18);
+  --glow-rose:      0 0 24px rgba(236, 72, 153, 0.55),
+                    0 0 60px rgba(217, 70, 239, 0.25);
+  --glow-soft:      0 0 12px rgba(236, 72, 153, 0.3);
+  --font-display:   'Playfair Display', Georgia, serif;
+  --font-body:      'Lato', Arial, sans-serif;
+  --transition-std: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--bg-deep);
+  color: #fff;
+  font-family: var(--font-body);
+  overflow: hidden;          /* sin scroll durante la experiencia */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Clase utilitaria: ocultar ───────────────────────────── */
+.hidden { display: none !important; }
+
+/* ============================================================
+   PANTALLA INICIAL
+   ============================================================ */
+#intro-screen {
+  position: fixed; inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Gradiente radial tipo "luz cálida en la oscuridad" */
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 60%, #2d0a2e 0%, #0a0510 75%);
+  z-index: 100;
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+
+/* Cuando se oculta, se desvanece con elegancia */
+#intro-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Contenedor central del intro */
+.intro-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  max-width: 480px;
+  width: 90%;
+  /* Cristal oscuro semitransparente */
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 48px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  animation: introAppear 1.2s ease forwards;
+}
+
+@keyframes introAppear {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Emoji grande decorativo */
+.intro-emoji {
+  font-size: clamp(2.8rem, 8vw, 4rem);
+  display: block;
+  margin-bottom: 0.6rem;
+  animation: roseFloat 3s ease-in-out infinite;
+}
+
+@keyframes roseFloat {
+  0%,100% { transform: translateY(0)   rotate(-3deg); }
+  50%      { transform: translateY(-8px) rotate( 3deg); }
+}
+
+/* Título principal */
+.intro-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  /* Gradiente de texto */
+  background: linear-gradient(135deg, #fcd34d 10%, #f472b6 50%, #d946ef 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  margin-bottom: 1rem;
+}
+
+/* Subtítulo poético */
+.intro-subtitle {
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+  color: var(--white-dim);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 1.4rem;
+}
+
+/* Dedicatoria */
+.intro-dedication {
+  font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+  color: var(--white-dim);
+  font-style: italic;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.intro-name {
+  color: var(--rose-soft);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1.1em;
+}
+
+/* Botón "Comenzar" */
+#start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 2.4rem;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 3.5vw, 1.15rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #be185d, #7e22ce);
+  box-shadow: 0 4px 24px rgba(190, 24, 93, 0.45),
+              0 0 0 0 rgba(244,114,182,0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Pulso sutil */
+  animation: btnPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes btnPulse {
+  0%,100% { box-shadow: 0 4px 24px rgba(190,24,93,0.45), 0 0 0 0 rgba(244,114,182,0.4); }
+  50%      { box-shadow: 0 4px 32px rgba(190,24,93,0.65), 0 0 0 10px rgba(244,114,182,0); }
+}
+
+#start-btn:hover  { transform: scale(1.05); }
+#start-btn:active { transform: scale(0.97); }
+
+/* Corazones decorativos en el intro (JS los genera) */
+.intro-hearts {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.intro-heart-particle {
+  position: absolute;
+  bottom: -10%;
+  font-size: 1.4rem;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0)   rotate(0deg)  scale(0.8); opacity: 0;   }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-110vh) rotate(20deg) scale(1.1); opacity: 0; }
+}
+
+/* ============================================================
+   PANTALLA PRINCIPAL — Karaoke
+   ============================================================ */
+#main-screen {
+  position: fixed; inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Gradiente base, complementado por el canvas de partículas */
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 55%, #1e0535 0%, #0a0510 70%);
+  overflow: hidden;
+}
+
+/* Canvas de corazones flotantes (fondo animado) */
+#hearts-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Encabezado de la canción ─────────────────────────────── */
+.song-header {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(1rem, 4vh, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+  color: var(--white-ghost);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.song-emoji { font-size: 0.95em; }
+.song-title-text { font-style: italic; }
+
+/* ── Escenario de letras ──────────────────────────────────── */
+.lyrics-stage {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  max-width: 680px;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 4vh, 2.2rem);
+  text-align: center;
+}
+
+/* ── Líneas de letra (estados) ───────────────────────────── */
+.lyric-line {
+  width: 100%;
+  font-family: var(--font-display);
+  line-height: 1.35;
+  transition: opacity var(--transition-std),
+              transform var(--transition-std),
+              color var(--transition-std),
+              text-shadow var(--transition-std),
+              filter var(--transition-std);
+  will-change: opacity, transform;
+  min-height: 1.5em;   /* evita saltos de layout cuando está vacío */
+}
+
+/* Línea anterior: difuminada, pequeña */
+.lyric-prev {
+  font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+  color: rgba(255,255,255,0.28);
+  opacity: 0.55;
+  transform: translateY(-6px) scale(0.96);
+  filter: blur(1px);
+  font-style: italic;
+}
+
+/* Línea activa: protagonista */
+.lyric-current {
+  font-size: clamp(1.45rem, 5.5vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: var(--glow-rose);
+  opacity: 1;
+  filter: none;
+  /* La transición la maneja JS con crossfade puro de opacidad */
+}
+
+/* Línea siguiente: apenas perceptible */
+.lyric-next {
+  font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+  color: rgba(255,255,255,0.2);
+  opacity: 0.4;
+  transform: translateY(6px) scale(0.95);
+  filter: blur(0.5px);
+  font-weight: 300;
+}
+
+/* ── Pie de página: progreso y tiempo ───────────────────── */
+.player-footer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 540px;
+  padding: 0 1.5rem clamp(1.2rem, 5vh, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Fila de tiempo + barra */
+.progress-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Tiempo transcurrido / total */
+.time-display {
+  font-size: 0.78rem;
+  color: var(--white-dim);
+  font-variant-numeric: tabular-nums;
+  min-width: 2.8rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* Contenedor de la barra de progreso */
+.progress-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Relleno animado de la barra */
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #be185d, #d946ef, #fcd34d);
+  box-shadow: 0 0 8px rgba(217,70,239,0.5);
+  transition: width 0.4s linear;
+}
+
+/* Emojis en el footer */
+.footer-emojis {
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  opacity: 0.5;
+  animation: emojiBreath 4s ease-in-out infinite;
+  letter-spacing: 0.3em;
+}
+
+@keyframes emojiBreath {
+  0%,100% { opacity: 0.4; transform: scale(1);    }
+  50%      { opacity: 0.7; transform: scale(1.06); }
+}
+
+/* ============================================================
+   DESTELLOS DE FONDO — efecto "estrella" sutil
+   (círculos pequeños generados con CSS, refuerzan el mood)
+   ============================================================ */
+#main-screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20%  30%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75%  20%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45%  80%, rgba(255,255,255,0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85%  65%, rgba(255,255,255,0.20) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10%  70%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60%  10%, rgba(255,255,255,0.30) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   ACCESIBILIDAD — respeto al usuario que prefiere sin movimiento
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   RESPONSIVE — ajustes finos para pantallas muy pequeñas
+   ============================================================ */
+@media (max-width: 380px) {
+  .lyrics-stage { gap: 1rem; }
+  .lyric-current { font-size: 1.3rem; }
+  .lyric-prev, .lyric-next { font-size: 0.85rem; }
+  .intro-title { font-size: 2rem; }
+}
