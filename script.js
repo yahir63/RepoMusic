@@ -4,7 +4,7 @@
 
 'use strict';
 
-const STOP_TIME = 123;
+const STOP_TIME = 122;
 const FADE_DURATION = 2500;
 
 const lyrics = [
@@ -88,7 +88,8 @@ function startExperience() {
     initCanvas();
 
     audioPlayer.play().catch(() => {
-      console.warn('No se pudo reproducir el audio automáticamente.');
+      // Safari bloqueó el audio — mostrar botón de play
+      document.getElementById('play-overlay').classList.remove('hidden');
     });
 
     audioPlayer.addEventListener('loadedmetadata', () => {
@@ -319,4 +320,13 @@ function animateCanvas() {
 
 window.addEventListener('resize', () => { if (canvasCtx) resizeCanvas(); });
 
+/* Desbloquea el audio en Safari cuando el usuario toca el botón ▶ */
+function unlockAudio() {
+  document.getElementById('play-overlay').classList.add('hidden');
+  audioPlayer.play().catch(() => {
+    console.warn('No se pudo reproducir el audio.');
+  });
+}
+
 window.startExperience = startExperience;
+window.unlockAudio     = unlockAudio;

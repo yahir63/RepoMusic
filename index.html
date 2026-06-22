@@ -23,7 +23,7 @@
       </p>
       <p class="intro-dedication">
         Con todo mi amor,<br />
-        <span class="intro-name">Yahir ✨</span>
+        <span class="intro-name">Tu nombre aquí ✨</span>
       </p>
       <!-- Botón que inicia la música y la animación -->
       <button id="start-btn" onclick="startExperience()">
@@ -48,6 +48,11 @@
       <span class="song-title-text">Yo Que No Vivo Sin Ti — Luis Miguel</span>
       <span class="song-emoji">🎵</span>
     </header>
+
+    <!-- Botón de play — visible solo si Safari bloquea el audio -->
+    <div id="play-overlay" class="hidden">
+      <button id="play-btn" onclick="unlockAudio()">▶</button>
+    </div>
 
     <!-- Área central donde aparecen las líneas de la letra -->
     <section class="lyrics-stage">
@@ -75,7 +80,7 @@
     <!-- Elemento de audio oculto.
          Cambia "cancion.mp3" por el nombre real de tu archivo. -->
     <audio id="audio-player" preload="auto">
-      <source src="cancion.mp4" type="audio/mpeg" />
+      <source src="cancion.mp3" type="audio/mpeg" />
       Tu navegador no soporta audio HTML5.
     </audio>
 
@@ -83,4 +88,4 @@
 
   <script src="script.js"></script>
 </body>
-</html>     
+</html>
